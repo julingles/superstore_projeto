@@ -9,16 +9,8 @@
 ## 📋 Índice
 
 - [Visão Geral](#visão-geral)
-- [Arquitetura](#arquitetura)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Pré-requisitos](#pré-requisitos)
-- [Configuração e Execução](#configuração-e-execução)
-- [Modelo de Dados](#modelo-de-dados)
-- [Funções Auxiliares](#funções-auxiliares)
-- [Consultas Analíticas](#consultas-analíticas)
-- [Troubleshooting](#troubleshooting)
-- [Contribuição](#contribuição)
-- [Licença](#licença)
+- [Arquitetura/Modelo de Dados<img width="1130" height="572" alt="modelo de dados" src="https://github.com/user-attachments/assets/517b8dcd-ffe3-4aa2-a0b3-a2703b1a3f01" />
+](#arquitetura)
 
 ---
 
