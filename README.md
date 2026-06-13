@@ -9,7 +9,8 @@
 ## 📋 Índice
 
 - [Visão Geral](#visão-geral)
-- [Arquitetura/Modelo de Dados](#arquitetura)
+- [Arquitetura](#arquitetura)
+- [Modelo de Dados](#modelo-de-dados)
 
 ---
 
@@ -34,71 +35,8 @@ Este projeto implementa um **ETL em SQL** para a base de dados Sales Superstore,
 ---
 
 ## 🏗️ Arquitetura
-┌─────────────────────────────────────────────────────────────────────────────────────┐
-│                                                                                     │
-│   📊 Excel (.xlsx)                                                                  │
-│   ┌─────────┐ ┌─────────┐ ┌─────────┐                                              │
-│   │ Orders  │ │ People  │ │ Returns │                                              │
-│   │   aba   │ │   aba   │ │   aba   │                                              │
-│   └────┬────┘ └────┬────┘ └────┬────┘                                              │
-│        │           │           │                                                    │
-│        ▼           ▼           ▼                                                    │
-│   ┌─────────────────────────────────┐                                              │
-│   │         📁 3 CSVs               │                                              │
-│   │   orders.csv  people.csv  returns.csv  │                                       │
-│   └────────────────┬────────────────┘                                              │
-│                    │                                                               │
-│                    ▼                                                               │
-│   ┌─────────────────────────────────────────────────┐                             │
-│   │                 🗄️ STAGING                      │                             │
-│   │         (Tabelas temporárias no PostgreSQL)      │                             │
-│   │    stage_orders │ stage_people │ stage_returns   │                             │
-│   └────────────────────────┬────────────────────────┘                             │
-│                            │                                                        │
-│                            ▼                                                        │
-│   ┌─────────────────────────────────────────────────┐                             │
-│   │                 ⚙️ TRATAMENTO                    │                             │
-│   │  ┌──────────┐ ┌──────────┐ ┌──────────────────┐ │                             │
-│   │  │ 🧹 TRIM  │ │ 📅 parse │ │ 🎯 padronização  │ │                             │
-│   │  │  espaços │ │  datas   │ │     regiões      │ │                             │
-│   │  └──────────┘ └──────────┘ └──────────────────┘ │                             │
-│   │  ┌──────────┐ ┌──────────┐ ┌──────────────────┐ │                             │
-│   │  │ 🔄 vírgula│ │ 📝 INITCAP│ │ 🔗 JOINs        │ │                             │
-│   │  │  para .  │ │  nomes   │ │   relacionamentos│ │                             │
-│   │  └──────────┘ └──────────┘ └──────────────────┘ │                             │
-│   └────────────────────────┬────────────────────────┘                             │
-│                            │                                                        │
-│                            ▼                                                        │
-│   ┌─────────────────────────────────────────────────┐                             │
-│   │            🏛️ TABELAS ANALÍTICAS                 │                             │
-│   │                (Star Schema)                     │                             │
-│   │                                                   │                             │
-│   │   ┌──────────┐ ┌──────────┐ ┌──────────────────┐ │                             │
-│   │   │dim_cust. │ │dim_prod. │ │  dim_address     │ │                             │
-│   │   └────┬─────┘ └────┬─────┘ └───────┬──────────┘ │                             │
-│   │        │            │               │            │                             │
-│   │        └────────────┼───────────────┘            │                             │
-│   │                     ▼                            │                             │
-│   │            ┌───────────────┐                     │                             │
-│   │            │  fact_sales   │                     │                             │
-│   │            │   (Fato)      │                     │                             │
-│   │            └───────────────┘                     │                             │
-│   │                                                   │                             │
-│   │   ┌──────────┐ ┌──────────┐ ┌──────────────────┐ │                             │
-│   │   │dim_order │ │dim_people│ │  dim_returns     │ │                             │
-│   │   └──────────┘ └──────────┘ └──────────────────┘ │                             │
-│   └────────────────────────┬────────────────────────┘                             │
-│                            │                                                        │
-│                            ▼                                                        │
-│   ┌─────────────────────────────────────────────────┐                             │
-│   │              📊 POWER BI                         │                             │
-│   │         Dashboards Interativos                   │                             │
-│   │                                                   │                             │
-│   │   📈 Vendas por região    🥧 Devoluções por mês  │                             │
-│   │   📊 Top 10 clientes      📉 Margem de lucro     │                             │
-│   │   🎯 KPIs de performance  📅 Tendências temporais│                             │
-│   └─────────────────────────────────────────────────┘                             │
-│                                                                                     │
-└─────────────────────────────────────────────────────────────────────────────────────┘
+<img width="1693" height="423" alt="image" src="https://github.com/user-attachments/assets/680d3d2e-553d-4042-a6f9-7642f7d8b65c" />
 
+
+## 📋 Modelo de Dados
 <img width="1130" height="572" alt="modelo de dados" src="https://github.com/user-attachments/assets/517b8dcd-ffe3-4aa2-a0b3-a2703b1a3f01" />
